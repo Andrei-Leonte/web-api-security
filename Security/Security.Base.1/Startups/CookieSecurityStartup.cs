@@ -53,10 +53,6 @@ namespace Security.Base._1.Startups
                 options.SlidingExpiration = true;
             });
 
-            var app = builder.Build();
-
-            app.UseExceptionHandler("/Error");
-            app.UseHsts();
         }
     }
 }

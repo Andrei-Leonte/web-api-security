@@ -1,8 +1,15 @@
+using Security.Base._1.Startups;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 
+builder.AddCookies();
+
 var app = builder.Build();
+
+app.UseExceptionHandler("/Error");
+app.UseHsts();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
