@@ -1,4 +1,4 @@
-namespace Security.Cookie.One.API
+namespace Security.Cookie.One.Client
 {
     public class WeatherForecast
     {

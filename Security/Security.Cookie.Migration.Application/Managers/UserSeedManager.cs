@@ -23,7 +23,6 @@ namespace Security.Cookie.Migration.Application.Managers
             {
                 while (await eNotarUsersEnumerator.MoveNextAsync())
                 {
-
                     await userSeedService.AssignRole(eNotarUsersEnumerator.Current);
                     await userSeedService.AssignClaims(eNotarUsersEnumerator.Current);
                 }

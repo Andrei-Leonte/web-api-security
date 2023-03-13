@@ -6,7 +6,7 @@ namespace Security.Cookie.Migration.Infrastructure
 {
     public static class IoContainer
     {
-        public static void RegisterMigrationPackages(this IServiceCollection serviceCollection)
+        public static void RegisterMigrationInfrastructurePackages(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IUserDbMigrationContext, UserDbMigrationContext>();
         }

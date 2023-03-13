@@ -8,10 +8,11 @@ namespace Security.Cookie.Migration.Application
 {
     public static class IoContainer
     {
-        public static void RegisterMigrationPackages(this IServiceCollection serviceCollection)
+        public static void RegisterMigrationApplicationPackages(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IUserSeedManager, UserSeedManager>();
             serviceCollection.AddScoped<IUserSeedService, UserSeedService>();
+            serviceCollection.AddScoped<IUserMigrationService, UserMigrationService>();
         }
     }
 }

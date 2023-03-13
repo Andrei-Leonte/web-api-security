@@ -27,9 +27,9 @@ namespace Security.Cookie.Two.API.Controllers
             }
             catch (Exception e)
             {
-                logger.LogCritical(e.ToString());
+                logger.LogCritical("An error has occured!", e);
 
-                return BadRequest();
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
         }
 
@@ -44,11 +44,10 @@ namespace Security.Cookie.Two.API.Controllers
             }
             catch (Exception e)
             {
-                logger.LogCritical(e.ToString());
+                logger.LogCritical("An error has occured!", e.ToString());
 
-                return BadRequest();
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
         }
-
     }
 }

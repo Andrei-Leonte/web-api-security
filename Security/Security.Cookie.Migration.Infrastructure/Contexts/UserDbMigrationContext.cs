@@ -4,7 +4,7 @@ using Security.Cookie.Migration.Infrastructure.Interfaces.Contexts;
 
 namespace Security.Cookie.Migration.Infrastructure.Contexts
 {
-    internal class UserDbMigrationContext : ApplicationContext, IUserDbMigrationContext
+    public class UserDbMigrationContext : ApplicationContext, IUserDbMigrationContext
     {
         public UserDbMigrationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
