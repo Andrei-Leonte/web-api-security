@@ -14,7 +14,7 @@ namespace Security.Cookie.Two.API.Controllers
 
         public AccountController(
             IAccountSignInService accountSignInManagerService, ILogger<AccountController> logger)
-            => (this.accountSignInManagerService, this.logger) = (accountSignInManagerService, logger);
+                => (this.accountSignInManagerService, this.logger) = (accountSignInManagerService, logger);
 
         [HttpPost("signin")]
         public async Task<IActionResult> SignInAsync(RequestSignInDto requestDto)
@@ -48,6 +48,12 @@ namespace Security.Cookie.Two.API.Controllers
 
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
+        }
+
+        [HttpGet("access/denied")]
+        public IActionResult AccessDenied()
+        {
+            return new UnauthorizedObjectResult("You are not authorize!");
         }
     }
 }

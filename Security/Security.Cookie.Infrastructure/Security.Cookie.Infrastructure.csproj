@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Security.Cookie.Domain\Security.Cookie.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
 </Project>

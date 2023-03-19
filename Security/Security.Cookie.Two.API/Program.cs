@@ -1,19 +1,34 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Security.Cookie.Application;
 using Security.Cookie.Domain.Entitties;
 using Security.Cookie.Infrastructure.Contexts;
+using Security.Cookie.Two.API.Startups;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("Cookie.SQL");
 
+//builder.SetApiVersioning();
+
+//builder.Services
+//    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//    .AddCookie();
+builder.Services.AddAuthentication(opts =>
+{
+    opts.DefaultAuthenticateScheme = "CookieAuthentication";
+    opts.DefaultChallengeScheme = "CookieAuthentication";
+    opts.DefaultScheme = "CookieAuthentication";
+    opts.AddScheme<CookieAuthenticationHandler>("CookieAuthentication", null);
+});
+
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services
-    .AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationContext>();
 
 builder.Services.Configure<IdentityOptions>(options =>
@@ -43,8 +58,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.Cookie.HttpOnly = true;
     options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
-    options.LoginPath = "/Identity/Account/Login";
-    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.LoginPath = "/api/account/signing";
+    options.AccessDeniedPath = "/api/account/access/denied";
     options.SlidingExpiration = true;
 });
 
@@ -66,6 +81,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseRouting();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
