@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("Cookie.SQL");
 
-//builder.SetApiVersioning();
+//builder.SetApiVersioning();                  
 
 //builder.Services
 //    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -28,7 +28,7 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services
-    .AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)                          
     .AddEntityFrameworkStores<ApplicationContext>();
 
 builder.Services.Configure<IdentityOptions>(options =>

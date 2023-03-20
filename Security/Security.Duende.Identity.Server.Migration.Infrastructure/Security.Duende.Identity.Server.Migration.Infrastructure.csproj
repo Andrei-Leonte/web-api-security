@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Duende.IdentityServer.EntityFramework" Version="6.2.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Security.Duende.Identity.Server.Infrastructure\Security.Duende.Identity.Server.Infrastructure.csproj" />
+    <ProjectReference Include="..\Security.Duende.Identity.Server.Migration.Domain\Security.Duende.Identity.Server.Migration.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
