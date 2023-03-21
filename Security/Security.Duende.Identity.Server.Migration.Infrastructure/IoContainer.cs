@@ -9,6 +9,8 @@ namespace Security.Duende.Identity.Server.Migration.Infrastructure
         public static void RegisterMigrationInfrastructurePackages(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IUserDbMigrationContext, UserDbMigrationContext>();
+            serviceCollection.AddScoped<IConfigurationDbContextMigration, ConfigurationDbContextMigration>();
+            serviceCollection.AddScoped<IPersistenGrantDbMigrationContext, PersistenGrantDbMigrationContext>();
         }
     }
 }

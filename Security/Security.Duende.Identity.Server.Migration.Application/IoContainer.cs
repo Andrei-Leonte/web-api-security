@@ -12,7 +12,7 @@ namespace Security.Duende.Identity.Server.Migration.Application
         {
             serviceCollection.AddScoped<IUserSeedManager, UserSeedManager>();
             serviceCollection.AddScoped<IUserSeedService, UserSeedService>();
-            serviceCollection.AddScoped<IUserMigrationService, UserMigrationService>();
+            serviceCollection.AddScoped<IMigrationService, MigrationService>();
         }
     }
 }
