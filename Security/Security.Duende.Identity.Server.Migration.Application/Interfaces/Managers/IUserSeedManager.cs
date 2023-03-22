@@ -1,7 +1,10 @@
-﻿namespace Security.Duende.Identity.Server.Migration.Application.Interfaces.Managers
+﻿using Security.Duende.Identity.Server.Migration.Application.Dtos;
+
+namespace Security.Duende.Identity.Server.Migration.Application.Interfaces.Managers
 {
     public interface IUserSeedManager
     {
-        Task AddAsync(Stream stream);
+        Task<IEnumerable<AddUserSeedDto>> GetDtosAsync(Stream stream);
+        Task AddAsync(IEnumerable<AddUserSeedDto> dtos);
     }
 }

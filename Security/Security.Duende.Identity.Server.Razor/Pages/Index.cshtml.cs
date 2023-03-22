@@ -1,20 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
+using Duende.IdentityServer.Hosting;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Security.Duende.Identity.Server.Razor.Pages
+namespace Security.Duende.Identity.Server.Razor.Pages;
+
+[AllowAnonymous]
+public class Index : PageModel
 {
-    public class IndexModel : PageModel
+    public string Version;
+
+    public void OnGet()
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
-
-        public void OnGet()
-        {
-
-        }
+        Version = typeof(IdentityServerMiddleware).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion.Split('+').First();
     }
 }

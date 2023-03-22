@@ -3,5 +3,6 @@
     public class UserRoleConst
     {
         public const string Admin = "admin";
+        public const string User = "user";
     }
 }

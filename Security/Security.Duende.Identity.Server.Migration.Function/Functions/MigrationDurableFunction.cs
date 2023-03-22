@@ -15,7 +15,7 @@ namespace Security.Duende.Identity.Server.Migration.Function.Functions
             => this.migrationService = migrationService;
 
         [Function("MigrationDurableFunction_HttpStart")]
-        public static async Task<HttpResponseData> HttpStart(
+        public async Task<HttpResponseData> HttpStart(
             [HttpTrigger(AuthorizationLevel.Admin, "post", Route = "v1/user/migrate"),] HttpRequestData req,
             [DurableClient] DurableTaskClient client,
             FunctionContext executionContext)
@@ -23,15 +23,15 @@ namespace Security.Duende.Identity.Server.Migration.Function.Functions
             ILogger logger = executionContext.GetLogger("MigrationDurableFunction_HttpStart");
 
             string instanceId = await client.ScheduleNewOrchestrationInstanceAsync(
-                nameof(MigrationDurableFunction));
+                nameof(RunMigrateUsersOrchestrationAsync));
 
             logger.LogInformation("Started orchestration with ID = '{instanceId}'.", instanceId);
 
             return client.CreateCheckStatusResponse(req, instanceId);
         }
 
-        [Function(nameof(MigrationDurableFunction))]
-        public async Task<List<string>> RunOrchestrator(
+        [Function(nameof(RunMigrateUsersOrchestrationAsync))]
+        public async Task<List<string>> RunMigrateUsersOrchestrationAsync(
             [OrchestrationTrigger] TaskOrchestrationContext context)
         {
             ILogger logger = context.CreateReplaySafeLogger(nameof(MigrationDurableFunction));

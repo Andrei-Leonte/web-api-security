@@ -5,7 +5,7 @@ using Microsoft.DurableTask.Client;
 using Microsoft.Extensions.Logging;
 using Security.Duende.Identity.Server.Migration.Application.Dtos;
 using Security.Duende.Identity.Server.Migration.Application.Interfaces.Managers;
-using Security.Duende.Identity.Server.Migration.Application.Services;
+using Security.Utils.Extensions;
 
 namespace Security.Duende.Identity.Server.Migration.Function.Functions
 {
@@ -13,24 +13,27 @@ namespace Security.Duende.Identity.Server.Migration.Function.Functions
     {
         private readonly IUserSeedManager userSeedManager;
 
+        public UserSeedMigrationDurableFunction(IUserSeedManager userSeedManager)
+            => this.userSeedManager = userSeedManager;
+
         [Function("UserSeedMigrationDurableFunction_HttpStart")]
-        public static async Task<HttpResponseData> HttpStart(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
+        public  async Task<HttpResponseData> HttpStart(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "v1/user/seed/migrate")] HttpRequestData req,
             [DurableClient] DurableTaskClient client,
             FunctionContext executionContext)
         {
             ILogger logger = executionContext.GetLogger("UserSeedMigrationDurableFunction_HttpStart");
 
-            string instanceId = await client.ScheduleNewOrchestrationInstanceAsync(
-                nameof(UserSeedMigrationDurableFunction));
+            var dtos = await userSeedManager.GetDtosAsync(req.Body);
 
-            logger.LogInformation("Started orchestration with ID = '{instanceId}'.", instanceId);
-            
-            return client.CreateCheckStatusResponse(req, instanceId);
+            string instanceId = await client.ScheduleNewOrchestrationInstanceAsync(
+                    nameof(RunUserSeedMigrationDurableFunction), dtos);
+
+            return req.CreateOkResult();
         }
 
-        [Function(nameof(UserSeedMigrationDurableFunction))]
-        public async Task<List<string>> RunOrchestrator(
+        [Function(nameof(RunUserSeedMigrationDurableFunction))]
+        public async Task<List<string>> RunUserSeedMigrationDurableFunction(
             [OrchestrationTrigger] TaskOrchestrationContext context)
         {
             ILogger logger = context.CreateReplaySafeLogger(nameof(MigrationDurableFunction));
@@ -46,13 +49,14 @@ namespace Security.Duende.Identity.Server.Migration.Function.Functions
         }
 
         [Function(nameof(MigrateUsersSeedAsync))]
-        public async Task<string> MigrateUsersSeedAsync([ActivityTrigger] string name, FunctionContext executionContext)
+        public async Task<string> MigrateUsersSeedAsync([ActivityTrigger] IEnumerable<AddUserSeedDto> dtos, FunctionContext executionContext)
         {
             try
             {
-                //await userSeedManager.AddAsync();
+                await userSeedManager.AddAsync(dtos);
 
-                return "Users migrated!";
+                return "Users seeds migrated!";
+
             }
             catch (Exception e)
             {

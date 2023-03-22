@@ -2,7 +2,7 @@
   "profiles": {
     "Security.Cookie.Migration.Function": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7113",
+      "commandLineArgs": "--port 2100",
       "launchBrowser": false
     }
   }

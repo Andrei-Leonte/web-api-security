@@ -1,4 +1,5 @@
-﻿using Security.Duende.Identity.Server.Migration.Application.Interfaces.Managers;
+﻿using Security.Duende.Identity.Server.Migration.Application.Dtos;
+using Security.Duende.Identity.Server.Migration.Application.Interfaces.Managers;
 using Security.Duende.Identity.Server.Migration.Application.Interfaces.Services;
 
 namespace Security.Duende.Identity.Server.Migration.Application.Managers
@@ -10,10 +11,13 @@ namespace Security.Duende.Identity.Server.Migration.Application.Managers
         public UserSeedManager(IUserSeedService userSeedService)
             => this.userSeedService = userSeedService;
 
-        public async Task AddAsync(Stream stream)
+        public async Task<IEnumerable<AddUserSeedDto>> GetDtosAsync(Stream stream)
         {
-            var dtos = await userSeedService.GetDtoAsync(stream);
+            return await userSeedService.GetDtoAsync(stream);
+        }
 
+        public async Task AddAsync(IEnumerable<AddUserSeedDto> dtos)
+        {
             var users = userSeedService.AddAsync(dtos);
             await userSeedService.AddAdminRoleAsync();
 
@@ -26,6 +30,10 @@ namespace Security.Duende.Identity.Server.Migration.Application.Managers
                     await userSeedService.AssignRole(eNotarUsersEnumerator.Current);
                     await userSeedService.AssignClaims(eNotarUsersEnumerator.Current);
                 }
+            }
+            catch(Exception e)
+            {
+                throw new Exception("An error has occured!", e);
             }
             finally
             {

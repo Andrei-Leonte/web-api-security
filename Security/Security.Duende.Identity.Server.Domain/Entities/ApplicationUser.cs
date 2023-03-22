@@ -5,6 +5,8 @@ namespace Security.Duende.Identity.Server.Domain.Entities
 {
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser() { }
+
         public ApplicationUser(string email, string firstName, string lastName)
         {
             Email = email;

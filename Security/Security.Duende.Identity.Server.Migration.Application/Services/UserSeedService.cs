@@ -67,8 +67,7 @@ namespace Security.Duende.Identity.Server.Migration.Application.Services
 
             if (!result.Succeeded)
             {
-                throw new UnableToAddRoleException(
-                    $"Unable to assign role {result.Errors.Select(r => r.Description)})");
+                return;
             }
 
             await roleManager.AddClaimAsync(
