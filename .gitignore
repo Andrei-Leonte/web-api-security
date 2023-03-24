@@ -43,13 +43,13 @@ msbuild.wrn
 
 # Angular
 # Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+/Security/Security.Duende.Identity.Client.Angular/dist
+/Security/Security.Duende.Identity.Client.Angular/tmp
+/Security/Security.Duende.Identity.Client.Angular/out-tsc
+/Security/Security.Duende.Identity.Client.Angular/bazel-out
 
 # Node
-/node_modules
+/Security/Security.Duende.Identity.Client.Angular/node_modules
 npm-debug.log
 yarn-error.log
 
@@ -71,7 +71,7 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-/.angular/cache
+/Security/Security.Duende.Identity.Client.Angular/.angular/cache
 .sass-cache/
 /connect.lock
 /coverage

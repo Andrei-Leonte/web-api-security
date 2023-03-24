@@ -65,6 +65,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Duende.Identity.Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Duende.Identity.Server.Migration.Infrastructure", "Security.Duende.Identity.Server.Migration.Infrastructure\Security.Duende.Identity.Server.Migration.Infrastructure.csproj", "{8D487589-3635-4BCF-BD29-CC6AC0456D76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.Duende.Identity.WebApplication1.API", "Security.Duende.Identity.WebApplication1.API\Security.Duende.Identity.WebApplication1.API.csproj", "{3F4C7CD6-6864-4450-A0D0-6AC6E20EEAF1}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Security.Duende.Identity.Client.Angular", "Security.Duende.Identity.Client.Angular\Security.Duende.Identity.Client.Angular.esproj", "{74A86BCB-8BEF-42EB-9CDF-52217A7FDFF3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +151,16 @@ Global
 		{8D487589-3635-4BCF-BD29-CC6AC0456D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D487589-3635-4BCF-BD29-CC6AC0456D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D487589-3635-4BCF-BD29-CC6AC0456D76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F4C7CD6-6864-4450-A0D0-6AC6E20EEAF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F4C7CD6-6864-4450-A0D0-6AC6E20EEAF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F4C7CD6-6864-4450-A0D0-6AC6E20EEAF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F4C7CD6-6864-4450-A0D0-6AC6E20EEAF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74A86BCB-8BEF-42EB-9CDF-52217A7FDFF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74A86BCB-8BEF-42EB-9CDF-52217A7FDFF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74A86BCB-8BEF-42EB-9CDF-52217A7FDFF3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{74A86BCB-8BEF-42EB-9CDF-52217A7FDFF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74A86BCB-8BEF-42EB-9CDF-52217A7FDFF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74A86BCB-8BEF-42EB-9CDF-52217A7FDFF3}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,6 +190,8 @@ Global
 		{88D3EF95-C962-4A51-A7E9-8DC0544FDF72} = {BBDB5701-F0D4-4E27-8F51-D6001A0A9755}
 		{91A90250-8687-43DE-AAB0-8BC7706873D2} = {BBDB5701-F0D4-4E27-8F51-D6001A0A9755}
 		{8D487589-3635-4BCF-BD29-CC6AC0456D76} = {BBDB5701-F0D4-4E27-8F51-D6001A0A9755}
+		{3F4C7CD6-6864-4450-A0D0-6AC6E20EEAF1} = {E48E0162-AC80-4B40-925B-AEC78CB47662}
+		{74A86BCB-8BEF-42EB-9CDF-52217A7FDFF3} = {E48E0162-AC80-4B40-925B-AEC78CB47662}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F565184-0EC3-49D1-A97D-A30E934CBD9A}

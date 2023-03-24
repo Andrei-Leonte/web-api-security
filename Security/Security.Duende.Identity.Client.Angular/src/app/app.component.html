@@ -1,0 +1,25 @@
+<h1> Masterclass Duende Identity Server</h1>
+
+<button (click)="signin()">Signin</button>
+
+<button (click)="signout()" [disabled]="!isButtonDisabled">Signout</button>
+<br>
+<label *ngIf="isButtonDisabled"> You are authenticated! </label>
+<br>
+<label *ngIf="showUserName"> You are logged in as {{userName}} </label>
+
+<br>
+<br>
+<br>
+
+<div *ngIf="isButtonDisabled">
+  <button (click)="getUserName()">Get Username</button>
+
+  <br>
+  <hr>
+  <br>
+
+  <button (click)="checkIdentity()"> Authorize request </button>
+  <br>
+  <label> Response: {{identityResponse}}</label>
+</div>

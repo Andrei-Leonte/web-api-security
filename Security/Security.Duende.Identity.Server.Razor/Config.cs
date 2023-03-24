@@ -9,8 +9,7 @@ public static class Config
         new List<IdentityResource>
         {
             new IdentityResources.OpenId(),
-            new IdentityResources.Profile(),
-            new IdentityResource("color", new [] { "favorite_color" })
+            new IdentityResources.Profile()
         };
 
 
@@ -40,13 +39,13 @@ public static class Config
                 ClientId = "web",
                 ClientSecrets = { new Secret("secret".Sha256()) },
 
-                AllowedGrantTypes = GrantTypes.Code,
+                AllowedGrantTypes = GrantTypes.CodeAndClientCredentials ,
                     
                 // where to redirect to after login
-                RedirectUris = { "https://localhost:2102/signin-oidc" },
+                RedirectUris = { "https://localhost:4200", "http://localhost:4200", "http://localhost", "https://localhost:4200/signin-oidc", "http://localhost:4200/signin-oidc" },
 
                 // where to redirect to after logout
-                PostLogoutRedirectUris = { "https://localhost:2102/signout-callback-oidc" },
+                PostLogoutRedirectUris = { "https://localhost:4200/signout-callback-oidc"},
 
                 AllowOfflineAccess = true,
 
@@ -54,9 +53,12 @@ public static class Config
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
-                    "api1",
-                    "color"
-                }
+                    "api1"
+                },
+
+                Enabled = true,
+                AllowedCorsOrigins = { "https://localhost:4200", "http://localhost:4200", "https://localhost" },
+                AllowAccessTokensViaBrowser= true
             }
         };
 }

@@ -1,4 +1,5 @@
-using Duende.IdentityServer;
+using Duende.IdentityServer.Configuration;
+using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Security.Duende.Identity.Server.Domain.Entities;
@@ -27,20 +28,14 @@ internal static class HostingExtensions
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
                 options.EmitStaticAudienceClaim = true;
+
+                options.Csp = new CspOptions() { Level = CspLevel.Two, AddDeprecatedHeader = true };
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryClients(Config.Clients)
             .AddAspNetIdentity<ApplicationUser>();
-
-        //builder.Services.AddAuthentication()
-        //    .AddGoogle(options =>
-        //    {
-        //        options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-
-        //        options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
-        //        options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
-        //    });
+        builder.Services.AddCors();
 
         return builder.Build();
     }
@@ -54,11 +49,11 @@ internal static class HostingExtensions
 
         app.UseStaticFiles();
         app.UseRouting();
+        app.UseCors(configurePolicy => configurePolicy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
         app.UseIdentityServer();
         app.UseAuthorization();
 
-        app.MapRazorPages()
-            .RequireAuthorization();
+        app.MapRazorPages().RequireAuthorization();
 
         return app;
     }
