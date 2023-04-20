@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Security.Duende.Identity.Server.Application": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50321;http://localhost:50322"
+    }
+  }
+}

@@ -19,6 +19,7 @@ export class AppComponent {
   public identityResponse: any
   public user: any
   public authorizeHeaders: HttpHeaders = new HttpHeaders;
+  public accessTokenHeaders: HttpHeaders = new HttpHeaders;
   
   constructor(private oauthService: OAuthService, private activatedRoute: ActivatedRoute, private http: HttpClient) {
   }
@@ -33,6 +34,9 @@ export class AppComponent {
       this.authorizeHeaders = new HttpHeaders({
         'Authorization': 'Bearer ' + window.sessionStorage.getItem('id_token')
         }) 
+      this.accessTokenHeaders = new HttpHeaders({
+        'Authorization': 'Bearer ' + window.sessionStorage.getItem('access_token')
+        }) 
     }
   }
 
@@ -42,6 +46,11 @@ export class AppComponent {
 
   signout() {
   }
+
+  renewToken() {
+    this.oauthService.silentRefresh()
+  }
+
   getUserName() {
     this.oauthService.loadUserProfile()
       .then(data => {
@@ -53,7 +62,7 @@ export class AppComponent {
   }
 
   checkIdentity() {
-    this.http.get('https://localhost:2103/identity/get', { headers: this.authorizeHeaders }).subscribe((data) => {
+    this.http.get('https://localhost:2103/identity/get', { headers: this.accessTokenHeaders }).subscribe((data) => {
       this.identityResponse = JSON.stringify(data);
     }, (error) => {
       console.error(error);

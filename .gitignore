@@ -48,8 +48,14 @@ msbuild.wrn
 /Security/Security.Duende.Identity.Client.Angular/out-tsc
 /Security/Security.Duende.Identity.Client.Angular/bazel-out
 
+/Security/Security.Cookie.Client.Angular/dist
+/Security/Security.Cookie.Client.Angular/tmp
+/Security/Security.Cookie.Client.Angular/out-tsc
+/Security/Security.Cookie.Client.Angular/bazel-out
+
 # Node
 /Security/Security.Duende.Identity.Client.Angular/node_modules
+/Security/Security.Cookie.Client.Angular/node_modules
 npm-debug.log
 yarn-error.log
 
@@ -72,6 +78,7 @@ yarn-error.log
 
 # Miscellaneous
 /Security/Security.Duende.Identity.Client.Angular/.angular/cache
+/Security/Security.Cookie.Client.Angular/.angular/cache
 .sass-cache/
 /connect.lock
 /coverage

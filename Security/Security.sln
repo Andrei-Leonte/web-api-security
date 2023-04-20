@@ -47,13 +47,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E48E0162-AC8
 		DuendeReadme.md = DuendeReadme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.Duende.Identity.Server.Razor", "Security.Duende.Identity.Server.Razor\Security.Duende.Identity.Server.Razor.csproj", "{EE37284C-6F3D-4BA8-89EC-E243D601D6D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Duende.Identity.Server.Razor", "Security.Duende.Identity.Server.Razor\Security.Duende.Identity.Server.Razor.csproj", "{EE37284C-6F3D-4BA8-89EC-E243D601D6D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.Duende.Identity.Server.Domain", "Security.Duende.Identity.Server.Domain\Security.Duende.Identity.Server.Domain.csproj", "{9CA61D26-8CBD-47BE-8E22-1DB7F9F983F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Duende.Identity.Server.Domain", "Security.Duende.Identity.Server.Domain\Security.Duende.Identity.Server.Domain.csproj", "{9CA61D26-8CBD-47BE-8E22-1DB7F9F983F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.Duende.Identity.Server.Application", "Security.Duende.Identity.Server.Application\Security.Duende.Identity.Server.Application.csproj", "{E8BBFCB4-1164-4D1E-9E21-EB5CC8CBB5F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Duende.Identity.Server.Application", "Security.Duende.Identity.Server.Application\Security.Duende.Identity.Server.Application.csproj", "{E8BBFCB4-1164-4D1E-9E21-EB5CC8CBB5F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.Duende.Identity.Server.Infrastructure", "Security.Duende.Identity.Server.Infrastructure\Security.Duende.Identity.Server.Infrastructure.csproj", "{56322195-761A-4540-B4D7-1B1A8CB78E70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Duende.Identity.Server.Infrastructure", "Security.Duende.Identity.Server.Infrastructure\Security.Duende.Identity.Server.Infrastructure.csproj", "{56322195-761A-4540-B4D7-1B1A8CB78E70}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", "{BBDB5701-F0D4-4E27-8F51-D6001A0A9755}"
 EndProject
@@ -65,9 +65,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Duende.Identity.Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Duende.Identity.Server.Migration.Infrastructure", "Security.Duende.Identity.Server.Migration.Infrastructure\Security.Duende.Identity.Server.Migration.Infrastructure.csproj", "{8D487589-3635-4BCF-BD29-CC6AC0456D76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security.Duende.Identity.WebApplication1.API", "Security.Duende.Identity.WebApplication1.API\Security.Duende.Identity.WebApplication1.API.csproj", "{3F4C7CD6-6864-4450-A0D0-6AC6E20EEAF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security.Duende.Identity.WebApplication1.API", "Security.Duende.Identity.WebApplication1.API\Security.Duende.Identity.WebApplication1.API.csproj", "{3F4C7CD6-6864-4450-A0D0-6AC6E20EEAF1}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Security.Duende.Identity.Client.Angular", "Security.Duende.Identity.Client.Angular\Security.Duende.Identity.Client.Angular.esproj", "{74A86BCB-8BEF-42EB-9CDF-52217A7FDFF3}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Security.Cookie.Client.Angular", "Security.Cookie.Client.Angular\Security.Cookie.Client.Angular.esproj", "{8A8FD1B8-B9F8-4FE6-ABFC-70BCE0428CA5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Browser.Policies", "Browser.Policies", "{75058668-DA28-4462-848C-52CFDB5D40C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Browser.Policy.Razor", "Browser.Policy.Razor\Browser.Policy.Razor.csproj", "{BFACD9FB-7346-4A4A-95FB-7B84DC971545}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -161,6 +167,16 @@ Global
 		{74A86BCB-8BEF-42EB-9CDF-52217A7FDFF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74A86BCB-8BEF-42EB-9CDF-52217A7FDFF3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{74A86BCB-8BEF-42EB-9CDF-52217A7FDFF3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8A8FD1B8-B9F8-4FE6-ABFC-70BCE0428CA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8FD1B8-B9F8-4FE6-ABFC-70BCE0428CA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8FD1B8-B9F8-4FE6-ABFC-70BCE0428CA5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8A8FD1B8-B9F8-4FE6-ABFC-70BCE0428CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8FD1B8-B9F8-4FE6-ABFC-70BCE0428CA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A8FD1B8-B9F8-4FE6-ABFC-70BCE0428CA5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BFACD9FB-7346-4A4A-95FB-7B84DC971545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFACD9FB-7346-4A4A-95FB-7B84DC971545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFACD9FB-7346-4A4A-95FB-7B84DC971545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFACD9FB-7346-4A4A-95FB-7B84DC971545}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -192,6 +208,8 @@ Global
 		{8D487589-3635-4BCF-BD29-CC6AC0456D76} = {BBDB5701-F0D4-4E27-8F51-D6001A0A9755}
 		{3F4C7CD6-6864-4450-A0D0-6AC6E20EEAF1} = {E48E0162-AC80-4B40-925B-AEC78CB47662}
 		{74A86BCB-8BEF-42EB-9CDF-52217A7FDFF3} = {E48E0162-AC80-4B40-925B-AEC78CB47662}
+		{8A8FD1B8-B9F8-4FE6-ABFC-70BCE0428CA5} = {43B1BF2B-0FE9-4C12-9A51-7ADFEEDBC791}
+		{BFACD9FB-7346-4A4A-95FB-7B84DC971545} = {75058668-DA28-4462-848C-52CFDB5D40C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F565184-0EC3-49D1-A97D-A30E934CBD9A}

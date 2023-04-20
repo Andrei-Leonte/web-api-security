@@ -1,0 +1,33 @@
+<h1> Masterclass Cookies</h1>
+
+<hr>
+
+<h2> Authenticate </h2>
+
+<form>
+  <label>
+    Username:
+    <input type="text" name="username" [(ngModel)]="username">
+  </label>
+  <label>
+    Password:
+    <input type="password" name="password" [(ngModel)]="password">
+  </label>
+  <br>
+  <button type="submit" (click)="login()">Login</button>
+</form>
+
+<hr>
+<br>
+<h2> Test Secure API Over HTTPS </h2>
+<button type="submit" (click)="testSecureAPIOverHttps()">Get authorized https response</button>
+
+<hr>
+<br>
+<h2> Test csp </h2>
+<button type="submit" (click)="testCSP()">Test csp</button>
+
+
+<!--<img src="{{imagePath}}" />-->
+
+<!--<iframe src="https://localhost:2111" title="description"></iframe>-->

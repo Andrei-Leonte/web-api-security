@@ -3,6 +3,8 @@
 <button (click)="signin()">Signin</button>
 
 <button (click)="signout()" [disabled]="!isButtonDisabled">Signout</button>
+
+<button (click)="renewToken()" [disabled]="!isButtonDisabled">Renew token</button>
 <br>
 <label *ngIf="isButtonDisabled"> You are authenticated! </label>
 <br>

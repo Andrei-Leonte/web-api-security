@@ -1,28 +1,13 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Security.Cookie.Application;
 using Security.Cookie.Domain.Entitties;
 using Security.Cookie.Infrastructure.Contexts;
-using Security.Cookie.Two.API.Startups;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("Cookie.SQL");
-
-//builder.SetApiVersioning();                  
-
-//builder.Services
-//    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//    .AddCookie();
-builder.Services.AddAuthentication(opts =>
-{
-    opts.DefaultAuthenticateScheme = "CookieAuthentication";
-    opts.DefaultChallengeScheme = "CookieAuthentication";
-    opts.DefaultScheme = "CookieAuthentication";
-    opts.AddScheme<CookieAuthenticationHandler>("CookieAuthentication", null);
-});
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseSqlServer(connectionString));
@@ -52,13 +37,14 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = false;
 });
 
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     // Cookie settings
     options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+    options.ExpireTimeSpan = TimeSpan.FromDays(100);
 
-    options.LoginPath = "/api/account/signing";
+    options.LoginPath = "/api/account/signin";
     options.AccessDeniedPath = "/api/account/access/denied";
     options.SlidingExpiration = true;
 });
@@ -66,13 +52,26 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.RegistersApplicationPackages();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder
+                .WithOrigins("https://localhost:2111", "http://localhost:2111")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        });
+});
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -80,8 +79,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseHsts();
 
 app.UseRouting();
+
+app.UseCors();
+
 
 app.UseAuthentication();
 app.UseAuthorization();

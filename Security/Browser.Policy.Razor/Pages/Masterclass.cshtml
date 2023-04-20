@@ -1,0 +1,35 @@
+﻿@page
+@model Browser.Policy.Razor.Pages.MasterclassModel
+@{
+}
+
+<button id="myButton1">Make API Request</button>
+<button id="myButton2">Download file</button>
+
+
+<script>
+    document.getElementById("myButton1").addEventListener("click", makeApiRequest);
+    document.getElementById("myButton2").addEventListener("click", downloadFileRequest);
+
+    function makeApiRequest() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText);
+            }
+        };
+        xhr.open("GET", "https://localhost:7089/api/Masterclass/place", true);
+        xhr.send();
+    }
+
+    function downloadFileRequest() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log('done');
+            }
+        };
+        xhr.open("GET", "https://localhost:7089/api/Masterclass/file", true);
+        xhr.send();
+    }
+</script>

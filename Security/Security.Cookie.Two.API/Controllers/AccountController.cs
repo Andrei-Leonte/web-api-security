@@ -17,13 +17,29 @@ namespace Security.Cookie.Two.API.Controllers
                 => (this.accountSignInManagerService, this.logger) = (accountSignInManagerService, logger);
 
         [HttpPost("signin")]
-        public async Task<IActionResult> SignInAsync(RequestSignInDto requestDto)
+        public async Task<IActionResult> SignInAsync(
+            [FromBody] RequestSignInDto requestDto)
         {
             try
             {
                 var responseDto = await accountSignInManagerService.SignInAsync(requestDto);
 
                 return Ok(responseDto);
+            }
+            catch (Exception e)
+            {
+                logger.LogCritical("An error has occured!", e);
+
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+        
+        [HttpGet("signin")]
+        public IActionResult SignInAsync([FromQuery]string returnUrl)
+        {
+            try
+            {
+                return Ok(returnUrl);
             }
             catch (Exception e)
             {

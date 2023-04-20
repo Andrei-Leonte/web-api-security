@@ -15,9 +15,13 @@ namespace Security.Cookie.Two.API.Controllers
         [Authorize, HttpGet, Route("test1")]
         public IActionResult Test1()
         {
-            var identities = httpContextAccessor.HttpContext.Request;
+            return Ok("You are authorized!");
+        }
 
-            return Ok();
+        [AllowAnonymous, HttpGet, Route("test2")]
+        public IActionResult Test2()
+        {
+            return Ok("Public request!");
         }
     }
 }

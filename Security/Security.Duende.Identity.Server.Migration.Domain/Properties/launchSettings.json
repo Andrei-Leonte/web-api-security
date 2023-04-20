@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Security.Duende.Identity.Server.Migration.Domain": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50327;http://localhost:50328"
+    }
+  }
+}
