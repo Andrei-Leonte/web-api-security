@@ -9,9 +9,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 
 export class AppComponent {
-  username = "";
-  password = "";
-  imagePath = ""
+  url = "https://localhost:2110"
+  username = "leonteiandrei@gmail.com";
+  password = "Andrei12345.#";
+  imagePath = "";
   containers = [];
 
   title = 'Security.Cookie.Client.Angular';
@@ -20,8 +21,8 @@ export class AppComponent {
   }
 
   login() {
-    const url = 'https://localhost:2110/api/Account/signin';
-    const data = { email: 'leonteiandrei@gmail.com', password: 'Andrei12345.#', rememberMe: true };
+    const url = this.url +'/api/Account/signin';
+    const data = { email: this.username, password: this.password, rememberMe: true };
 
     this.http.post(url, data, { withCredentials: true }).subscribe(response => {
       console.log(response);
@@ -31,17 +32,23 @@ export class AppComponent {
   }
 
   testSecureAPIOverHttps() {
-    var url1 = 'https://localhost:2110/api/test/test1';
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://localhost:2110',
-        'Access-Control-Allow-Credentials': 'true'
-      }),
-      withCredentials: true
-    };
+    var url1 = this.url + '/api/Authorized/test1';
 
     this.http.get(url1, { withCredentials: true }).subscribe(response => {
+      console.log(response);
+    }, error => {
+      console.error(error);
+    });
+  }
+
+  configureCSP() {
+    var url1 = this.url + '/api/csp/add';
+
+    this.http.get(url1, { withCredentials: true, observe: 'response' }).subscribe(response => {
+      const cspValue = response.headers.get('csp');
+
+      console.log(response)
+      this.addCSPMetaTag(cspValue!!)
       console.log(response);
     }, error => {
       console.error(error);
@@ -52,5 +59,29 @@ export class AppComponent {
     this.containers.push();
     this.containers.push();
     const SCRIPT_PATH = 'https://apis.google.com/js/api.js';
+
+    const script = document.createElement('script');
+    script.src = 'https://apis.google.com/js/api.js';
+    document.body.appendChild(script);
+  }
+
+  testRateLimiting() {
+    var url1 = this.url + '/api/public/usv';
+
+    for (var i = 0; i < 30; i++) {
+      this.http.get(url1, { withCredentials: true }).subscribe(response => {
+        console.log(response);
+      }, error => {
+        console.error(error);
+      });
+    }
+  }
+
+  addCSPMetaTag(cspValue: string) {
+    console.log("cspValue ===> ", cspValue)
+    const meta = document.createElement('meta');
+    meta.setAttribute('http-equiv', 'Content-Security-Policy');
+    meta.setAttribute('content', cspValue);
+    document.getElementsByTagName('head')[0].appendChild(meta);
   }
 }

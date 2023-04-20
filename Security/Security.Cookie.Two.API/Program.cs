@@ -1,20 +1,42 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Security.Cookie.Application;
 using Security.Cookie.Domain.Entitties;
 using Security.Cookie.Infrastructure.Contexts;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("Cookie.SQL");
 
+// Rate limiter
+builder.Services.AddRateLimiter(_ => _
+    .AddFixedWindowLimiter(policyName: "fixed", options =>
+    {
+        options.PermitLimit = 2;
+        options.Window = TimeSpan.FromSeconds(30);
+        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        options.QueueLimit = 1;
+    }));
+
+builder.Services.AddControllers();
+
+//Compression
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+});
+
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services
     .AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)                          
-    .AddEntityFrameworkStores<ApplicationContext>();
+    .AddEntityFrameworkStores<ApplicationContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -37,16 +59,29 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = false;
 });
 
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//    .AddCookie(options =>
+//    {
+//        // Cookie settings
+//        options.Cookie.HttpOnly = false;
+//        options.Cookie.SameSite = SameSiteMode.Strict;
+//        options.ExpireTimeSpan = TimeSpan.FromDays(100);
+
+//        options.LoginPath = "/api/account/signin";
+//        options.AccessDeniedPath = "/api/account/access/denied";
+//        options.SlidingExpiration = true;
+//    });
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    // Cookie settings
-    options.Cookie.HttpOnly = true;
+    //options.Cookie.HttpOnly = false;
+    //options.Cookie.SameSite = SameSiteMode.Strict;
     options.ExpireTimeSpan = TimeSpan.FromDays(100);
 
-    options.LoginPath = "/api/account/signin";
+    //options.LoginPath = "/api/account/signin";
     options.AccessDeniedPath = "/api/account/access/denied";
     options.SlidingExpiration = true;
+
 });
 
 builder.Services.RegistersApplicationPackages();
@@ -63,7 +98,7 @@ builder.Services.AddCors(options =>
         builder =>
         {
             builder
-                .WithOrigins("https://localhost:2111", "http://localhost:2111")
+                .WithOrigins("https://project120230420165425.azurewebsites.net", "http://project120230420165425.azurewebsites.net")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
@@ -71,6 +106,14 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+app.UseWhen(
+    context => true,
+    appBuilder => appBuilder.Use(async (context, next) =>
+    {
+        context.Response.Headers.Add("X-Frame-Options", "DENY");
+        await next();
+    }));
 
 if (app.Environment.IsDevelopment())
 {
@@ -83,11 +126,18 @@ app.UseHsts();
 
 app.UseRouting();
 
+
 app.UseCors();
 
+// Rate limiter
+app.UseRateLimiter();
+
+// Compression
+app.UseResponseCompression();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllers();
 

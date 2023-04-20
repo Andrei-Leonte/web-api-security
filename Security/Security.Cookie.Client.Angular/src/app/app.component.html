@@ -1,9 +1,16 @@
-<h1> Masterclass Cookies</h1>
+<h1> Masterclass Policies and cookies</h1>
 
 <hr>
 
 <h2> Authenticate </h2>
 
+
+<h2> Server URL</h2>
+
+<input type="text" name="url" [(ngModel)]="url">
+<br>
+<br>
+<hr>
 <form>
   <label>
     Username:
@@ -24,10 +31,25 @@
 
 <hr>
 <br>
+<h2> Configure csp </h2>
+<button type="submit" (click)="configureCSP()">Test csp</button>
+<br>
+<hr>
 <h2> Test csp </h2>
 <button type="submit" (click)="testCSP()">Test csp</button>
+<br>
+<hr>
 
+<h2>
+  Iframes X-Frame Options
+</h2>
+<iframe src="https://localhost:2110/swagger/index.html" width="100" height="100"></iframe>
+<br />
+<iframe src="https://google.com" width="100" height="100"></iframe>
+
+
+<hr>
+<button type="submit" (click)="testRateLimiting()">Test rate limiting</button>
 
 <!--<img src="{{imagePath}}" />-->
-
 <!--<iframe src="https://localhost:2111" title="description"></iframe>-->

@@ -1,6 +1,4 @@
 # Ignore local appSettings Dot net
-appsettings.Development.json
-appsettings.json
 app.db
 
 *.swp
